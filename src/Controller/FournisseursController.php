@@ -44,6 +44,7 @@ class FournisseursController extends AbstractController
                 [],
                 Response::HTTP_SEE_OTHER
             );
+            
         }
         return $this->render('fournisseurs/update.html.twig', [
             'form' => $form, 'fournisseurs' => $fournisseursRepository->findAll(),

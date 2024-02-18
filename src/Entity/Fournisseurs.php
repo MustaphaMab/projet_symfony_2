@@ -15,7 +15,7 @@ class Fournisseurs
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column (name: 'Id_fournisseur')]
     private ?int $Id_fournisseur = null;
 
     #[ORM\Column(length: 50)]
@@ -47,6 +47,14 @@ class Fournisseurs
 
     #[ORM\Column(length: 50)]
     private ?string $Fax_fournisseur = null;
+
+    #[ORM\OneToMany(targetEntity: Commander::class, mappedBy: 'Id_fournisseur')]
+    private Collection $commanders;
+
+    public function __construct()
+    {
+        $this->commanders = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -170,6 +178,36 @@ class Fournisseurs
     public function setFaxFournisseur(string $Fax_fournisseur): static
     {
         $this->Fax_fournisseur = $Fax_fournisseur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commander>
+     */
+    public function getCommanders(): Collection
+    {
+        return $this->commanders;
+    }
+
+    public function addCommander(Commander $commander): static
+    {
+        if (!$this->commanders->contains($commander)) {
+            $this->commanders->add($commander);
+            $commander->setIdFournisseur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommander(Commander $commander): static
+    {
+        if ($this->commanders->removeElement($commander)) {
+            // set the owning side to null (unless already changed)
+            if ($commander->getIdFournisseur() === $this) {
+                $commander->setIdFournisseur(null);
+            }
+        }
 
         return $this;
     }

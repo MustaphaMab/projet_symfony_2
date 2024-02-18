@@ -16,7 +16,7 @@ class Livres
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name: 'Id_Livre')]
     private ?int $Id_Livre = null;
 
     #[ORM\Column(length: 50)]
@@ -48,6 +48,14 @@ class Livres
 
     #[ORM\Column(length: 100)]
     private ?string $langue_livre = null;
+
+    #[ORM\OneToMany(targetEntity: Commander::class, mappedBy: 'Id_Livre')]
+    private Collection $commanders;
+
+    public function __construct()
+    {
+        $this->commanders = new ArrayCollection();
+    }
 
  
     
@@ -175,6 +183,36 @@ class Livres
     public function setLangueLivre(string $langue_livre): static
     {
         $this->langue_livre = $langue_livre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commander>
+     */
+    public function getCommanders(): Collection
+    {
+        return $this->commanders;
+    }
+
+    public function addCommander(Commander $commander): static
+    {
+        if (!$this->commanders->contains($commander)) {
+            $this->commanders->add($commander);
+            $commander->setIdLivre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommander(Commander $commander): static
+    {
+        if ($this->commanders->removeElement($commander)) {
+            // set the owning side to null (unless already changed)
+            if ($commander->getIdLivre() === $this) {
+                $commander->setIdLivre(null);
+            }
+        }
 
         return $this;
     }
