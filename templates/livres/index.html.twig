@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Livres
+{% endblock %}
+
+{% block body %}
+
+	<style>
+		.example-wrapper {
+    margin: 10%;
+    border-radius: 1%;
+    width: 70%;
+    font: 18px / 2 sans-serif;
+    background-color: #f0f0f0; /* Exemple de fond */
+    border: 1px solid #ccc; /* Exemple de bordure */
+}
+		</style>
+	<div >
+
+
+		<table class="example-wrapper" class="table table-success table-striped">
+
+
+			<tr>
+
+				<TH>ISBN</TH>
+				<TH>Titre livre</TH>
+				<TH>Theme livre</TH>
+				<TH>Nbr pages livre</TH>
+				<TH>Format livre</TH>
+				<TH>Nom auteur</TH>
+				<TH>Prenom auteur</TH>
+				<TH>Prix</TH>
+				<TH>Langue</TH>
+				<TH>Actions</TH>
+			</tr>
+
+			{% for livre in livres %}
+
+				<tr>
+
+
+					<td>
+						{{ livre.isbn }}
+					</td>
+					<td>
+						{{ livre.titrelivre }}
+					</td>
+					<td>
+						{{ livre.themelivre }}
+					</td>
+					<td>
+						{{ livre.nbrpageslivre }}
+					</td>
+					<td>
+						{{ livre.formatlivre }}
+					</td>
+					<td>
+						{{ livre.nomauteur }}
+					</td>
+					<td>
+						{{ livre.prenomauteur }}
+					</td>
+					<td>
+						{{ livre.prixvente }}
+					</td>
+					<td>
+						{{ livre.languelivre }}
+					</td>
+
+
+					<td>
+					<div class="container d-flex flex-raw">
+						<a class="btn btn-outline-info" href="{{ path('form_Livres', {'id': livre.id}) }}"
+						onclick="return confirm('Vous étes sur de vouloir modifer vos données?')">Modifier</a>
+						
+
+						<a  class="btn btn-outline-danger" href="{{ path ('delete_livres', {'id':livre .id}) }}" 
+						onclick="return confirm('Vous étes sur ? Vos données seront perdus?')">Supprimer</a>
+
+						<a class="btn btn-outline-secondary"  href="{{ path('create_livre') }}"
+						onclick="return confirm('Vous étes sur de vouloir ajouter un livre?')">Ajout</a>
+					</div>
+					</td>
+				</tr>
+
+			{% endfor %}
+		</table>
+
+	</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+    {% block title %}
+        Création d'un fournisseur
+    {% endblock %}
+
+    {% block body %}
+     <div class="text-center">
+     <h1> Création d'un fournisseur </h1>
+
+    {{ form_start(form) }}
+        <div class ="mx-auto container  ml-5">
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-primary  mt-4">{{ 'Validez la création' }}</button>
+    </div>
+
+    {{ form_end(form) }}
+    </div>
+
+{% endblock %}
