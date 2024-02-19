@@ -7,15 +7,15 @@
 
 	<style>
 		.example-wrapper {
-    margin: 10%;
-    border-radius: 1%;
-    width: 70%;
-    font: 18px / 2 sans-serif;
-    background-color: #f0f0f0; /* Exemple de fond */
-    border: 1px solid #ccc; /* Exemple de bordure */
-}
-		</style>
-	<div >
+			margin: 10%;
+			border-radius: 1%;
+			width: 70%;
+			font: 18px / 2 sans-serif;
+			background-color: #f0f0f0; /* Exemple de fond */
+			border: 1px solid #ccc; /* Exemple de bordure */
+		}
+	</style>
+	<div>
 
 
 		<table class="example-wrapper" class="table table-success table-striped">
@@ -35,52 +35,49 @@
 				<TH>Actions</TH>
 			</tr>
 
-			{% for livre in livres %}
+			{% for livres in livres %}
 
 				<tr>
 
 
 					<td>
-						{{ livre.isbn }}
+						{{ livres.isbn }}
 					</td>
 					<td>
-						{{ livre.titrelivre }}
+						{{ livres.titrelivre }}
 					</td>
 					<td>
-						{{ livre.themelivre }}
+						{{ livres.themelivre }}
 					</td>
 					<td>
-						{{ livre.nbrpageslivre }}
+						{{ livres.nbrpage }}
 					</td>
 					<td>
-						{{ livre.formatlivre }}
+						{{ livres.formatlivre }}
 					</td>
 					<td>
-						{{ livre.nomauteur }}
+						{{ livres.nomauteur }}
 					</td>
 					<td>
-						{{ livre.prenomauteur }}
+						{{ livres.prenomauteur }}
 					</td>
 					<td>
-						{{ livre.prixvente }}
+						{{ livres.prix }}
 					</td>
 					<td>
-						{{ livre.languelivre }}
+						{{ livres.langue }}
 					</td>
 
 
 					<td>
-					<div class="container d-flex flex-raw">
-						<a class="btn btn-outline-info" href="{{ path('form_Livres', {'id': livre.id}) }}"
-						onclick="return confirm('Vous étes sur de vouloir modifer vos données?')">Modifier</a>
-						
+						<div class="container d-flex flex-raw">
+							<a class="btn btn-outline-info" href="{{ path('form_Livres', {'id': livres.id}) }}" onclick="return confirm('Vous étes sur de vouloir modifer vos données?')">Modifier</a>
 
-						<a  class="btn btn-outline-danger" href="{{ path ('delete_livres', {'id':livre .id}) }}" 
-						onclick="return confirm('Vous étes sur ? Vos données seront perdus?')">Supprimer</a>
 
-						<a class="btn btn-outline-secondary"  href="{{ path('create_livre') }}"
-						onclick="return confirm('Vous étes sur de vouloir ajouter un livre?')">Ajout</a>
-					</div>
+							<a class="btn btn-outline-danger" href="{{ path ('delete_livres', {'id':livres.id}) }}" onclick="return confirm('Vous étes sur ? Vos données seront perdus?')">Supprimer</a>
+
+							<a class="btn btn-outline-secondary" href="{{ path('create_livre') }}" onclick="return confirm('Vous étes sur de vouloir ajouter un livre?')">Ajout</a>
+						</div>
 					</td>
 				</tr>
 

@@ -22,7 +22,7 @@ class Commander
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false, name: 'Id_fournisseur', referencedColumnName:'Id_fournisseur')]
-    private ?fournisseurs $Id_fournisseur = null;
+    private ?Fournisseurs $Id_fournisseur = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $Date_achat = null;
@@ -62,12 +62,7 @@ class Commander
         return $this;
     }
 
-    public function getDateAchat(): ?string
-    {
-        return $this->Date_achat;
-    }
-
-    public function setDateAchat(string $Date_achat): static
+    public function getDateAchat(string $Date_achat): static
     {
         $this->Date_achat = $Date_achat;
 
