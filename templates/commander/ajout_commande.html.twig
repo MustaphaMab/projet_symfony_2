@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+    {% block title %}
+        Ajout commande
+    {% endblock %}
+
+    {% block body %}
+    <h1  class=" text-aligne text-center"> Ajout commande </h1>
+
+    {{ form_start(form) }}
+        <div class ="mx-auto container  ml-5">
+        {# <table class="border=1 w-75 mx-auto table table-dark table-striped-columns"> #}
+    {{ form_widget(form) }}
+
+    <button class="btn btn-primary  mt-4">{{ ' Ajout commande ' }}</button>
+    </div>
+    
+    {{ form_end(form) }}
+
+{% endblock %}
