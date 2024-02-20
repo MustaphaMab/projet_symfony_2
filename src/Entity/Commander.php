@@ -13,15 +13,15 @@ class Commander
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(name:"id_commande")]
     private ?int $id = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false, name: 'Id_livre', referencedColumnName: '$Id_Livre')]
+    #[ORM\JoinColumn(nullable: false, name: 'Id_livre', referencedColumnName: 'Id_Livre')]
     private ?Livres $Id_Livre = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false, name: 'Id_fournisseur', referencedColumnName:'Id_fournisseur')]
+    #[ORM\JoinColumn(nullable: false, name: 'Id_fournisseur', referencedColumnName: 'Id_fournisseur')]
     private ?Fournisseurs $Id_fournisseur = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -31,7 +31,7 @@ class Commander
     private ?string $Prix_achat = null;
 
     #[ORM\Column(type: Types::BIGINT)]
-    private ?string $Nbr_exemplaires = null;
+    private ?int $Nbr_exemplaires = null;
 
     public function getId(): ?int
     {
@@ -50,19 +50,24 @@ class Commander
         return $this;
     }
 
-    public function getIdFournisseur(): ?fournisseurs
+    public function getIdFournisseur(): ?Fournisseurs
+{
+    return $this->Id_fournisseur;
+}
+
+public function setIdFournisseur(?Fournisseurs $Id_fournisseur): self
+{
+    $this->Id_fournisseur = $Id_fournisseur;
+
+    return $this;
+}
+
+    public function getDateAchat(): ?\DateTimeInterface
     {
-        return $this->Id_fournisseur;
+        return $this->Date_achat;
     }
 
-    public function setIdFournisseur(?fournisseurs $Id_fournisseur): static
-    {
-        $this->Id_fournisseur = $Id_fournisseur;
-
-        return $this;
-    }
-
-    public function getDateAchat(string $Date_achat): static
+    public function setDateAchat(?\DateTimeInterface $Date_achat): self
     {
         $this->Date_achat = $Date_achat;
 
@@ -73,7 +78,6 @@ class Commander
     {
         return $this->Prix_achat;
     }
-
     public function setPrixAchat(string $Prix_achat): static
     {
         $this->Prix_achat = $Prix_achat;
@@ -81,15 +85,15 @@ class Commander
         return $this;
     }
 
-    public function getNbrExemplaires(): ?string
+    public function getNbrExemplaires(): ?int
     {
         return $this->Nbr_exemplaires;
     }
 
-    public function setNbrExemplaires(string $Nbr_exemplaires): static
+    public function setNbrExemplaires(int $Nbr_exemplaires): self
     {
         $this->Nbr_exemplaires = $Nbr_exemplaires;
-
+    
         return $this;
     }
 }

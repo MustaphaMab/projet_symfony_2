@@ -21,14 +21,13 @@ class CommanderRepository extends ServiceEntityRepository
         parent::__construct($registry, Commander::class);
     }
 
-    public function findAllCommandesWithJointures(): array
+    public function findAllCommanderWithJointures(): array
 
     {   
         return $this->createQueryBuilder("c")
                     ->addSelect('l', 'f')
                     ->leftJoin('c.Id_Livre','l')
                     ->leftJoin('c.Id_fournisseur','f')
-                    ->orderBy('c.id','ASC')
                     ->getQuery()
                     ->getResult();
         ;

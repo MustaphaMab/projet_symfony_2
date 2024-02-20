@@ -1,20 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommanderController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1 class="text-center"> Liste des commandes </h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <a href="/commandes/ajout"> <button  class="btn btn-success m-3" type="submit"> <i class="bi bi-plus-square"></i> Ajout commande</button></a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/ACER/Desktop/Projet_2_Symfony/projet_symfony_2/projet_symfony_2/src/Controller/CommanderController.php</code></li>
-        <li>Your template at <code>C:/Users/ACER/Desktop/Projet_2_Symfony/projet_symfony_2/projet_symfony_2/templates/commander/index.html.twig</code></li>
-    </ul>
-</div>
+    <table class="border=1 w-75 mx-auto table table-dark table-striped-columns">
+        <tr>
+            <th> Livre </th>
+            <th> Fournisseur </th>
+            <th> Date d'achat </th>
+            <th> Prix d'achat </th>
+            <th> Nbr d'exemplaires </th>
+           
+            <th >Action </th>   
+
+        </tr>
+
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.idlivre.TitreLivre }}</td>
+                <td>{{ commande.idfournisseur.RaisonSociale }}</td>
+                <td>{{ commande.dateachat |date('Y-m-d') }}</td>  
+                <td>{{ commande.prixachat }}</td>  
+                <td>{{ commande.nbrexemplaires }}</td>  
+            
+    
+{#             
+                <td>
+                <div class="d-flex">
+                    <a href="{{ path ('update_commande', {'id':commande.id}) }}"><i class="bi bi-pencil-square btn btn-warning mx-2"></i></a>
+                    <a href="{{ path ('delete_commande', {'id':commande.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer la commande?')"><i class="bi bi-trash btn btn-danger"></i></a>
+                </div>
+                </td> #}
+            </tr> 
+        {% endfor %}
+
+
+    </table>
 {% endblock %}
