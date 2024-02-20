@@ -7,8 +7,9 @@
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div
 				class="navbar-nav">
-				{# <a class="nav-link active" aria-current="page" href="{{ path('app_livres') }}">Livres</a> #}
 
+
+				{# *************************************************************** LIVRES ***************************************************  #}
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -30,11 +31,32 @@
 					</ul>
 				</li>
 
+				{# **************************************************************** FOURNISSEURS **********************************************  #}
 
-				<a class="nav-link" href="{{ path('app_fournisseurs') }}">Fournisseurs</a>
-				<a class="nav-link" href="#">Commandes</a>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+						Fournisseurs</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="{{ path('app_fournisseurs') }}">Tous les fournisseurs</a>
+						</li>
+						<li><hr class="dropdown-divider"></li>
+						<li>
+							<a class="dropdown-item" href="{{ path('forme_fournisseurs_raison_sociale') }}">Par raison sociale</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('forme_fournisseurs_localite') }}">Par localité</a>
+						</li>
+						{# <li>
+																									<a class="dropdown-item" href="{{ path('#') }}">Par pays</a>
+											</li> #}
+					</li>
+				</li>
+			</ul>
+		</li>
 
-			</div>
-		</div>
+
+		<a class="nav-link" href="#">Commandes</a>
+
 	</div>
-</nav>
+</div></div></nav>

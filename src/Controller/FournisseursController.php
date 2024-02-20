@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\RaisonSocialeType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Fournisseurs;
@@ -87,5 +88,36 @@ class FournisseursController extends AbstractController
              'form' => $form->createView()
          ]);
      }
+
+    //   PAR RAISON SOCIALE *******************************************************************************************************
+
+    #[Route('/Raison_sociale', name: 'forme_fournisseurs_raison_sociale', methods: [
+        'GET',
+        'POST'
+    ])]
+    public function forme_fournisseurs_raison_sociale(Request $request, FournisseursRepository $fournisseursRepo, EntityManagerInterface
+    $entityManager)
+    {
+
+        $form = $this->createForm(RaisonSocialeType::class, null);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $raisonSocialeSelectionne = $form->get('Raison_sociale')->getData();
+
+
+
+            return $this->render('fournisseurs/index.html.twig', [
+
+                'fournisseurs' => $fournisseursRepo->findBy(['Raison_sociale' => $raisonSocialeSelectionne]),
+            ]);
+        }
+        return $this->render('fournisseurs/form_raison_sociale.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
     
+
+     
 }
