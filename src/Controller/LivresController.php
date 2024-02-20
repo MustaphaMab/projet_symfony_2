@@ -13,8 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\LivreRepository;
 use App\Form\LivreType;
 use App\Entity\Livre;
-
+use App\Form\EditeurLivreType;
 use App\Form\TitreLivreType;
+use App\Form\AuteurLivreType;
 
 class LivresController extends AbstractController
 {
@@ -62,7 +63,7 @@ class LivresController extends AbstractController
     public function delete(int $id, EntityManagerInterface $entityManager,  LivresRepository $livresRepository): Response
     {
         $livre = $livresRepository->find($id);
-        var_dump($livre);
+
         $entityManager->remove($livre);
 
         $entityManager->flush();
@@ -110,16 +111,71 @@ class LivresController extends AbstractController
 
 
 
-
-
-
-
             return $this->render('livres/index.html.twig', [
 
                 'livres' => $LivresRepo->findBy(['titrelivre' => $titreSelectionne]),
             ]);
         }
         return $this->render('livres/form_titre_livre.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    // LIVRE PAR EDITEUR ***************************************************************************************************************
+
+    #[Route('/forme_Editeur', name: 'forme_livre_Editeur', methods: [
+        'GET',
+        'POST'
+    ])]
+    public function forme_livre_Editeur(Request $request, LivresRepository $LivresRepo, EntityManagerInterface
+    $entityManager)
+    {
+
+        $form = $this->createForm(EditeurLivreType::class, null);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $editeurSelectionne = $form->get('editeur')->getData();
+
+
+
+            return $this->render('livres/index.html.twig', [
+
+                'livres' => $LivresRepo->findBy(['editeur' => $editeurSelectionne]),
+            ]);
+        }
+        return $this->render('livres/form_editeur_livre.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    // LIVRE PAR AUTEUR ***************************************************************************************************************
+
+    #[Route('/forme_Nomauteur', name: 'forme_livre_Auteur', methods: [
+        'GET',
+        'POST'
+    ])]
+    public function forme_livre_Auteur(Request $request, LivresRepository $LivresRepo, EntityManagerInterface
+    $entityManager)
+    {
+
+        $form = $this->createForm(AuteurLivreType::class, null);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $auteurSelectionne = $form->get('nomauteur')->getData();
+
+
+
+            return $this->render('livres/index.html.twig', [
+
+                'livres' => $LivresRepo->findBy(['nomauteur' => $auteurSelectionne]),
+            ]);
+        }
+        return $this->render('livres/form_auteur_livre.html.twig', [
             'form' => $form->createView(),
         ]);
     }
