@@ -1,69 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fournisseurs
-{% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 5%;
-			border-radius: 5%;
-			width: 50%;
-			font: 15px / 2 sans-serif;
+	<h1 class="text-center">
+		Liste des fournisseurs
+	</h1>
+	<a class="btn btn-outline-secondary" href="{{ path('create_fournisseurs') }}" onclick="return confirm('Vous étes sur de vouloir ajouter un fournisseur?')">Ajout</a>
 
-		}
-	</style>
+	<table class="example-wrapper table table-success table-striped">
+		<tr>
 
+			<TH>Code fournisseur</TH>
+			<TH>Raison sociale</TH>
+			<TH>Rue fournisseur</TH>
+			<TH>Code postal</TH>
+			<TH>Localité</TH>
+			<TH>Pays</TH>
+			<TH>Tel fournisseur</TH>
+			<TH>Url fournisseur</TH>
+			<TH>Email fournisseur</TH>
+			<TH>Fax fournisseur</TH>
+			<TH>Actions</TH>
+		</tr>
 
-	<div class="example-wrapper">
-
-
-		<table class="table table-success table-striped">
+		{% for fournisseur in fournisseurs %}
 			<tr>
+				<td>{{ fournisseur.codeFournisseur }}</td>
+				<td>{{ fournisseur.raisonSociale }}</td>
+				<td>{{ fournisseur.rueFournisseur }}</td>
+				<td>{{ fournisseur.codePostal }}</td>
+				<td>{{ fournisseur.localite }}</td>
+				<td>{{ fournisseur.pays }}</td>
+				<td>{{ fournisseur.telFournisseur }}</td>
+				<td>{{ fournisseur.urlFournisseur }}</td>
+				<td>{{ fournisseur.emailFournisseur }}</td>
+				<td>{{ fournisseur.faxFournisseur }}</td>
+				<td>
 
-				<TH>Code fournisseur</TH>
-				<TH>Raison sociale</TH>
-				<TH>Rue fournisseur</TH>
-				<TH>Code postal</TH>
-				<TH>Localité</TH>
-				<TH>Pays</TH>
-				<TH>Tel fournisseur</TH>
-				<TH>Url fournisseur</TH>
-				<TH>Email fournisseur</TH>
-				<TH>Fax fournisseur</TH>
-				<TH>Actions</TH>
+					<div class="container d-flex flex-raw">
+						<a class="btn btn-outline-info" href="{{ path('form_fournisseurs', {'id': fournisseur.id}) }}" onclick=" return confirm('vous étes sur de vouloir modifer vos données?')">Modifier</a>
+
+
+						<a class="btn btn-outline-danger" href="{{ path ('delete_fournisseurs', {'id':fournisseur.id}) }}" onclick="return confirm('Vous étes sur ? Vos données seront perdus.')">Supprimer</a>
+
+
+					</div>
+
+
+				</td>
 			</tr>
+		{% endfor %}
 
-			{% for fournisseur in fournisseurs %}
-				<tr>
-					<td>{{ fournisseur.codeFournisseur }}</td>
-					<td>{{ fournisseur.raisonSociale }}</td>
-					<td>{{ fournisseur.rueFournisseur }}</td>
-					<td>{{ fournisseur.codePostal }}</td>
-					<td>{{ fournisseur.localite }}</td>
-					<td>{{ fournisseur.pays }}</td>
-					<td>{{ fournisseur.telFournisseur }}</td>
-					<td>{{ fournisseur.urlFournisseur }}</td>
-					<td>{{ fournisseur.emailFournisseur }}</td>
-					<td>{{ fournisseur.faxFournisseur }}</td>
-					<td>
-
-						<div class="container d-flex flex-raw">
-							<a class="btn btn-outline-info" href="{{ path('form_fournisseurs', {'id': fournisseur.id}) }}" 
-							onclick=" return confirm('vous étes sur de vouloir modifer vos données?')">Modifier</a>
-
-
-							<a class="btn btn-outline-danger" href="{{ path ('delete_fournisseurs', {'id':fournisseur.id}) }}" 
-							onclick="return confirm('Vous étes sur ? Vos données seront perdus.')">Supprimer</a>
-
-
-						</div>
-
-
-					</td>
-				</tr>
-			{% endfor %}
-			<a class="btn btn-outline-secondary" href="{{ path('create_fournisseurs') }}" onclick="return confirm('Vous étes sur de vouloir ajouter un fournisseur?')">Ajout</a>
-		</a>
-	</table>
-</div>{% endblock %}
+	</a>
+</table>{% endblock %}

@@ -1,78 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Livres
-{% endblock %}
-
 {% block body %}
-
+<h1 class="text-center">
+		Liste des livres
+	</h1>
 	<div>
-
-
-		<table class="example-wrapper" class="table table-success table-striped">
-
-
+		<table class="example-wrapper table table-success table-striped">
 			<tr>
-
-				<TH>ISBN</TH>
-				<TH>Titre livre</TH>
-				<TH>Theme livre</TH>
-				<TH>Nbr pages livre</TH>
-				<TH>Format livre</TH>
-				<TH>Nom auteur</TH>
-				<TH>Prenom auteur</TH>
-				<TH>Prix</TH>
-				<TH>Langue</TH>
-				<TH>Actions</TH>
+				<th>ISBN</th>
+				<th>Titre livre</th>
+				<th>Theme livre</th>
+				<th>Nbr pages livre</th>
+				<th>Format livre</th>
+				<th>Nom auteur</th>
+				<th>Prenom auteur</th>
+				<th>Prix</th>
+				<th>Langue</th>
+				<th>Actions</th>
 			</tr>
-
 			{% for livres in livres %}
-
 				<tr>
-
-
-					<td>
-						{{ livres.isbn }}
-					</td>
-					<td>
-						{{ livres.titrelivre }}
-					</td>
-					<td>
-						{{ livres.themelivre }}
-					</td>
-					<td>
-						{{ livres.nbrpage }}
-					</td>
-					<td>
-						{{ livres.formatlivre }}
-					</td>
-					<td>
-						{{ livres.nomauteur }}
-					</td>
-					<td>
-						{{ livres.prenomauteur }}
-					</td>
-					<td>
-						{{ livres.prix }}
-					</td>
-					<td>
-						{{ livres.langue }}
-					</td>
-
-
+					<td>{{ livres.isbn }}</td>
+					<td>{{ livres.titrelivre }}</td>
+					<td>{{ livres.themelivre }}</td>
+					<td>{{ livres.nbrpage }}</td>
+					<td>{{ livres.formatlivre }}</td>
+					<td>{{ livres.nomauteur }}</td>
+					<td>{{ livres.prenomauteur }}</td>
+					<td>{{ livres.prix }}</td>
+					<td>{{ livres.langue }}</td>
 					<td>
 						<div class="container d-flex flex-raw">
-							<a class="btn btn-outline-info" href="{{ path('form_Livres', {'id': livres.id}) }}" onclick="return confirm('Vous étes sur de vouloir modifer vos données?')">Modifier</a>
-
-
-							<a class="btn btn-outline-danger" href="{{ path ('delete_livres', {'id':livres.id}) }}" onclick="return confirm('Vous étes sur ? Vos données seront perdus?')">Supprimer</a>
-
-							<a class="btn btn-outline-secondary" href="{{ path('create_livre') }}" onclick="return confirm('Vous étes sur de vouloir ajouter un livre?')">Ajout</a>
+							<a class="btn btn-outline-info" href="{{ path('form_Livres', {'id': livres.id}) }}" onclick="return confirm('Vous êtes sur de vouloir modifier vos données?')">Modifier</a>
+							<a class="btn btn-outline-danger" href="{{ path('delete_livres', {'id': livres.id}) }}" onclick="return confirm('Vous êtes sur ? Vos données seront perdues?')">Supprimer</a>
+							<a class="btn btn-outline-secondary" href="{{ path('create_livre') }}" onclick="return confirm('Vous êtes sur de vouloir ajouter un livre?')">Ajout</a>
 						</div>
 					</td>
 				</tr>
-
 			{% endfor %}
 		</table>
-
 	</div>
 {% endblock %}

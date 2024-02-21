@@ -3,7 +3,13 @@
 }
 
 body {
-  margin-bottom: 60px;
+  margin: 0;
+  padding-bottom: 60px; /* Espace pour le footer sans empiéter sur le contenu */
+  background-image: url("/images/livres.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
 }
 
 .footer {
@@ -11,49 +17,45 @@ body {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #f5f5f5 ;
+  background-color: #f5f5f577;
   text-align: center;
   padding: 10px 0;
 }
 
-body .main-container {
-  background-image: url("/images/livres.jpg");
-  background-size: cover; /* Couvre toute la zone du conteneur, en étant coupée si nécessaire */
-  background-position: center; /* Centre l'image dans le conteneur */
-  min-height: 100vh; /* Assure que le conteneur prend au moins la hauteur de la fenêtre de visualisation */
-  /* display: flex;
-    justify-content: center;
-    align-items: center; */
-}
-h1 {
+h1,
+p,
+ul {
   text-align: center;
   background-color: rgba(50, 140, 201, 0.521);
 }
-/* .example-wrapper {
+
+.example-wrapper {
   margin: 2em auto;
   max-width: 800px;
-  width: 95%;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.8); /* Plus transparent */
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px; /* Coins arrondis avec contrôle précis */
 }
 
-.example-wrapper h1 {
-  color: #333;
+.table {
+  margin: auto; /* Centrer le tableau dans .example-wrapper */
 }
 
-.example-wrapper ul {
+ul {
   list-style: none;
   padding: 0;
 }
 
-.example-wrapper ul li {
+ul li {
   padding: 10px;
-
   margin-bottom: 10px;
-  border-radius: 5px;
+  border-radius: 5px; /* Coins arrondis pour chaque élément de liste */
 }
 
-.example-wrapper ul li:last-child {
+ul li:last-child {
   margin-bottom: 0;
-} */
+}
+.bg-light-transparent {
+  background-color: rgba(248, 249, 250, 0.5) !important/* Couleur de fond bg-light avec 50% de transparence */
+}
