@@ -2,41 +2,56 @@
 
 
 {% block body %}
-    <h1 class="text-center"> Liste des commandes </h1>
-
-    <a href="/commandes/ajout"> <button  class="btn btn-success m-3" type="submit"> <i class="bi bi-plus-square"></i> Ajout commande</button></a>
-
-    <table class="border=1 w-75 mx-auto table table-dark table-striped-columns">
-        <tr>
-            <th> Livre </th>
-            <th> Fournisseur </th>
-            <th> Date d'achat </th>
-            <th> Prix d'achat </th>
-            <th> Nbr d'exemplaires </th>
-           
-            <th >Action </th>   
-
-        </tr>
-
-        {% for commande in commandes %}
-            <tr>
-                <td>{{ commande.idlivre.TitreLivre }}</td>
-                <td>{{ commande.idfournisseur.RaisonSociale }}</td>
-                <td>{{ commande.dateachat |date('Y-m-d') }}</td>  
-                <td>{{ commande.prixachat }}</td>  
-                <td>{{ commande.nbrexemplaires }}</td>  
-            
-    
-{#             
-                <td>
-                <div class="d-flex">
-                    <a href="{{ path ('update_commande', {'id':commande.id}) }}"><i class="bi bi-pencil-square btn btn-warning mx-2"></i></a>
-                    <a href="{{ path ('delete_commande', {'id':commande.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer la commande?')"><i class="bi bi-trash btn btn-danger"></i></a>
-                </div>
-                </td> #}
-            </tr> 
-        {% endfor %}
+	<h1 class="text-center">
+		Liste des commandes
+	</h1>
+	<a class="btn btn-outline-secondary" href="{{ path('ajout_commande') }}" onclick="return confirm('Vous étes sur de vouloir ajouter une commande?')">Ajout</a>
 
 
-    </table>
+	<table class="border=1 w-75 mx-auto table table-dark table-striped-columns">
+		<tr>
+			<th>
+				Livre
+			</th>
+			<th>
+				Fournisseur
+			</th>
+			<th>
+				Date d'achat
+			</th>
+			<th>
+				Prix d'achat
+			</th>
+			<th>
+				Nbr d'exemplaires
+			</th>
+
+			<th>Action
+			</th>
+
+		</tr>
+
+		{% for commande in commandes %}
+			<tr>
+				<td>{{ commande.idlivre.TitreLivre }}</td>
+				<td>{{ commande.idfournisseur.RaisonSociale }}</td>
+				<td>{{ commande.dateachat |date('Y-m-d') }}</td>
+				<td>{{ commande.prixachat }}</td>
+				<td>{{ commande.nbrexemplaires }}</td>
+
+				<td>
+
+					<div class="container d-flex flex-raw">
+						<a class="btn btn-outline-info" href="{{ path('form_commander_modif', {'id':commande.id}) }}" onclick=" return confirm('vous étes sur de vouloir modifer vos données?')">Modifier</a>
+
+						<a class="btn btn-outline-danger" href="{{ path('supprime_commande', {'id':commande.id}) }}" onclick="return confirm('Vous étes sur ? Vos données seront perdus.')">Supprimer</a>
+
+					</div>
+
+				</td>
+			</tr>
+		{% endfor %}
+
+
+	</table>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Commander;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @extends ServiceEntityRepository<Commander>
@@ -21,6 +22,12 @@ class CommanderRepository extends ServiceEntityRepository
         parent::__construct($registry, Commander::class);
     }
 
+
+    /**
+     * @param \DateTimeInterface $date
+     * @return Commander[]
+     */
+    
     public function findAllCommanderWithJointures(): array
 
     {   
@@ -31,6 +38,15 @@ class CommanderRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
         ;
+    }
+
+    public function findCommandesByDate(\DateTimeInterface $date): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.dateachat = :date')
+            ->setParameter('date', $date->format('Y-m-d'))
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**

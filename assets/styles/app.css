@@ -1,4 +1,59 @@
-body {
-    background-color: rgb(255, 138, 4);
-
+* {
+  box-sizing: border-box;
 }
+
+body {
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f5f5f5 ;
+  text-align: center;
+  padding: 10px 0;
+}
+
+body .main-container {
+  background-image: url("/images/livres.jpg");
+  background-size: cover; /* Couvre toute la zone du conteneur, en étant coupée si nécessaire */
+  background-position: center; /* Centre l'image dans le conteneur */
+  min-height: 100vh; /* Assure que le conteneur prend au moins la hauteur de la fenêtre de visualisation */
+  /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+h1 {
+  text-align: center;
+  background-color: rgba(50, 140, 201, 0.521);
+}
+/* .example-wrapper {
+  margin: 2em auto;
+  max-width: 800px;
+  width: 95%;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.example-wrapper h1 {
+  color: #333;
+}
+
+.example-wrapper ul {
+  list-style: none;
+  padding: 0;
+}
+
+.example-wrapper ul li {
+  padding: 10px;
+
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.example-wrapper ul li:last-child {
+  margin-bottom: 0;
+} */

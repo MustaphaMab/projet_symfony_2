@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+    {% block title %}
+        Update commande
+    {% endblock %}
+
+    {% block body %}
+     <div class="text-center">
+     <h1> Update commande </h1>
+
+    {{ form_start(form) }}
+        <div class ="mx-auto container  ml-5">
+    {{ form_widget(form) }}
+
+    <button type="submit" class="btn btn-primary  mt-4">{{ 'Validez la modification' }}</button>
+    </div>
+
+    {{ form_end(form) }}
+    </div>
+
+{% endblock %}
