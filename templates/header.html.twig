@@ -1,20 +1,25 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="{{ path('app_home_controllers') }}" ">Accueil</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div
-				class="navbar-nav">
 
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			
+			<ul
+				class="navbar-nav ms-auto">
 
-				{# *************************************************************** LIVRES ***************************************************  #}
-
+				{# ACCUEIL #}
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="{{ path('app_home_controllers') }}">Accueil</a>
+				</li>
+				{# Livres #}
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-						Livres</a>
-					<ul class="dropdown-menu">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkLivres" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Livres
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkLivres">
 						<li>
 							<a class="dropdown-item" href="{{ path('app_livres') }}">Tous les livres</a>
 						</li>
@@ -31,12 +36,12 @@
 					</ul>
 				</li>
 
-				{# **************************************************************** FOURNISSEURS **********************************************  #}
-
+				{# FOURNISSEURS #}
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-						Fournisseurs</a>
-					<ul class="dropdown-menu">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkFournisseurs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Fournisseurs
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkFournisseurs">
 						<li>
 							<a class="dropdown-item" href="{{ path('app_fournisseurs') }}">Tous les fournisseurs</a>
 						</li>
@@ -50,17 +55,15 @@
 						<li>
 							<a class="dropdown-item" href="{{ path('forme_fournisseurs_pays') }}">Par pays</a>
 						</li>
-					</li>
+					</ul>
 				</li>
-			</ul>
-		</li>
 
-				{# **************************************************************** COMMANDE **********************************************  #}
-
+				{# COMMANDES #}
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-						Commandes</a>
-					<ul class="dropdown-menu">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkCommandes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Commandes
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCommandes">
 						<li>
 							<a class="dropdown-item" href="{{ path('app_commandes') }}">Toutes les commandes</a>
 						</li>
@@ -68,18 +71,10 @@
 						<li>
 							<a class="dropdown-item" href="{{ path('commandes_par_date') }}">Par date</a>
 						</li>
-						{# <li>
-							<a class="dropdown-item" href="{{ path('forme_fournisseurs_localite') }}">Par localité</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('forme_fournisseurs_pays') }}">Par pays</a>
-						</li> #}
-					</li>
+
+					</ul>
 				</li>
 			</ul>
-		</li>
-
-
-
+		</div>
 	</div>
-</div></div></nav>
+</nav>
