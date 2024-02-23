@@ -88,63 +88,88 @@ class CommanderController extends AbstractController
 
     //  *********************************************************** COMMANDE PAR DATE ********************************
 
-    #[Route('/pardate', name: 'commandes_par_date', methods:['GET','POST'])]
-public function commande_date(Request $request, CommanderRepository $commanderRepository, EntityManagerInterface $entityManager): Response
-{
+    #[Route('/pardate', name: 'commandes_par_date', methods: ['GET', 'POST'])]
+    public function commande_date(Request $request, CommanderRepository $commanderRepository, EntityManagerInterface $entityManager): Response
+    {
+        // Récupérer toutes les commandes
+        $commandes = $commanderRepository->findAll();
     
-     // Récupérer toutes les commandes avec les jointures
-     $commande = $commanderRepository->findAllCommandesWithJointures();
-     $datesAchat = [];
-     $form= $this-> createForm(CommanderType::class,$commande);
-     foreach ($commande as $commandedate) {
-         $dateAchat = $commandedate->getDateAchat()->format('Y-m-d'); // Formatage de la date
-         $datesAchat[$dateAchat] = $dateAchat; // Utilisation de la date comme clé et comme valeur
-     }
-     return $this->render('commander/com_raison.html.twig', [          
-        'form' => $form->createView(),
-         
-     
- 
-   ]);
+        $datesAchat = [];
+    
+        // Générer les options pour le formulaire de sélection de date
+        foreach ($commandes as $commandedate) {
+            $dateAchat = $commandedate->getDateAchat()->format('Y-m-d'); // Formatage de la date
+            $datesAchat[$dateAchat] = $dateAchat; // Utilisation de la date comme clé et comme valeur
+        }
+    
+        // Créer le formulaire de sélection de date
+        $form = $this->createFormBuilder()
+            ->add('date', ChoiceType::class, [
+               'choices' => $datesAchat,
+               'placeholder' => 'Choisir une date',
+                'required' => false,  
+                'multiple' => false 
+            ])
+            ->getForm();
+    
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dateChoisie = $form->get('date')->getData();
+            $dateChoisie = new \DateTime($dateChoisie);
+            $commandesDate = $commanderRepository->findBy(['Date_achat' => $dateChoisie]);
+    
+            // Afficher les commandes filtrées par la date choisie
+            return $this->render('commander/index.html.twig', [
+                'commandes' => $commandesDate,
+            ]);
+        }
+    
+        // Afficher le formulaire de sélection de date si non soumis ou invalide
+        return $this->render('commander/dateCommande.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
+    
+
     //******************************************** COMMANDE PAR EDITEUR ********************************************
 
-#[Route('/editeur', name: 'commande_editeur', methods:['GET','POST'])]
+    #[Route('/editeur', name: 'commande_editeur', methods: ['GET', 'POST'])]
 
-public function commande_editeur( Request $request, CommanderRepository $commanderRepository, EntityManagerInterface $entityManager): Response
-{
-    $commande = $commanderRepository->findAllCommandesWithJointures(); // Récupérer tous les fournisseurs
-  
-    $form = $this->createFormBuilder()
-        ->add('editeur', ChoiceType::class, [
-            'choices' => $commande, // Utiliser les noms de fournisseur comme choix
-            'choice_label' => 'IdLivre.Editeur',
-            'choice_value' => 'IdLivre.id',
-             'placeholder' => 'Choisir un editeur', 
-             'required' => false, 
-             'multiple' => false  
-          
-        ])
-       
-        ->getForm();
+    public function commande_editeur(Request $request, CommanderRepository $commanderRepository, EntityManagerInterface $entityManager): Response
+    {
+        $commande = $commanderRepository->findAllCommandesWithJointures(); // Récupérer tous les fournisseurs
 
-    $form->handleRequest($request);
-   
-    if ($form->isSubmitted() && $form->isValid()) {
-      
-      $editeurchoisis = $form->get('editeur')->getData();
-        $editeurselect = $editeurchoisis->getIdLivre();
-        
-        return $this->render('commander/com_editeurresult.html.twig', [
-                    'commandes'=> $commanderRepository->findBy(['Id_Livre' => $editeurselect]) ,
-          
-      ]);
-     }
-   
-      return $this->render('commander/com_editeur.html.twig', [
-        'form' => $form->createView(),
-        
-  
-    ]);
-}
+        $form = $this->createFormBuilder()
+            ->add('editeur', ChoiceType::class, [
+                'choices' => $commande, // Utiliser les noms de fournisseur comme choix
+                'choice_label' => 'IdLivre.Editeur',
+                'choice_value' => 'IdLivre.id',
+                'placeholder' => 'Choisir un editeur',
+                'required' => false,
+                'multiple' => false
+
+            ])
+
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $editeurchoisis = $form->get('editeur')->getData();
+            $editeurselect = $editeurchoisis->getIdLivre();
+
+            return $this->render('commander/com_editeurresult.html.twig', [
+                'commandes' => $commanderRepository->findBy(['Id_Livre' => $editeurselect]),
+
+            ]);
+        }
+
+        return $this->render('commander/com_editeur.html.twig', [
+            'form' => $form->createView(),
+
+
+        ]);
+    }
 }

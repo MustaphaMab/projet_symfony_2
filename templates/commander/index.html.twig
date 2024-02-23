@@ -5,53 +5,63 @@
 	<h1 class="text-center">
 		Liste des commandes
 	</h1>
-	<a class="btn btn-outline-secondary" href="{{ path('ajout_commande') }}" onclick="return confirm('Vous étes sur de vouloir ajouter une commande?')">Ajout</a>
 
 
-	<table class="example-wrapper table table-success table-striped">
-		<tr>
-			<th>
-				Livre
-			</th>
-			<th>
-				Fournisseur
-			</th>
-			<th>
-				Date d'achat
-			</th>
-			<th>
-				Prix d'achat
-			</th>
-			<th>
-				Nbr d'exemplaires
-			</th>
+	<div class="container my-4">
 
-			<th>Action
-			</th>
+<div class="table-responsive">
 
-		</tr>
+		<div class="d-grid gap-2">
+			<a class="btn btn-outline-secondary" href="{{ path('ajout_commande') }}" onclick="return confirm('Vous êtes sûr de vouloir ajouter une commande?')">Ajout</a>
+		</div>
 
-		{% for commande in commandes %}
+
+		<table class="example-wrapper table table-success table-striped">
 			<tr>
-				<td>{{ commande.idlivre.TitreLivre }}</td>
-				<td>{{ commande.idfournisseur.RaisonSociale }}</td>
-				<td>{{ commande.dateachat |date('Y-m-d') }}</td>
-				<td>{{ commande.prixachat }}</td>
-				<td>{{ commande.nbrexemplaires }}</td>
+				<th>
+					Livre
+				</th>
+				<th>
+					Fournisseur
+				</th>
+				<th>
+					Date d'achat
+				</th>
+				<th>
+					Prix d'achat
+				</th>
+				<th>
+					Nbr d'exemplaires
+				</th>
 
-				<td>
+				<th>Action
+				</th>
 
-					<div class="container d-flex flex-raw">
-						<a class="btn btn-outline-info" href="{{ path('form_commander_modif', {'id':commande.id}) }}" onclick=" return confirm('vous étes sur de vouloir modifer vos données?')">Modifier</a>
-
-						<a class="btn btn-outline-danger" href="{{ path('supprime_commande', {'id':commande.id}) }}" onclick="return confirm('Vous étes sur ? Vos données seront perdus.')">Supprimer</a>
-
-					</div>
-
-				</td>
 			</tr>
-		{% endfor %}
+
+			{% for commande in commandes %}
+				<tr>
+					<td>{{ commande.idlivre.TitreLivre }}</td>
+					<td>{{ commande.idfournisseur.RaisonSociale }}</td>
+					<td>{{ commande.dateachat |date('Y-m-d') }}</td>
+					<td>{{ commande.prixachat }}</td>
+					<td>{{ commande.nbrexemplaires }}</td>
+
+					<td>
+
+						<div class="container d-flex flex-raw">
+							<a class="btn btn-outline-info" href="{{ path('form_commander_modif', {'id':commande.id}) }}" onclick=" return confirm('vous étes sur de vouloir modifer vos données?')">Modifier</a>
+
+							<a class="btn btn-outline-danger" href="{{ path('supprime_commande', {'id':commande.id}) }}" onclick="return confirm('Vous étes sur ? Vos données seront perdus.')">Supprimer</a>
+
+						</div>
+
+					</td>
+				</tr>
+			{% endfor %}
 
 
-	</table>
+		</table>
+	</div>
+	</div>
 {% endblock %}

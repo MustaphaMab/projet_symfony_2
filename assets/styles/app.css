@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding-bottom: 60px; /* Espace pour le footer sans empiéter sur le contenu */
-  background-image: url("/images/livres.jpg");
+  background-image: url("/images/livre.jpg");
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -25,7 +25,9 @@ body {
 h1, p, ul {
   text-align: center;
   background-color: rgba(50, 140, 201, 0.521);
+  color: white;
 }
+
 
 .example-wrapper {
   margin: 2em auto;
@@ -88,4 +90,9 @@ ul li:last-child {
 #navbarNavDropdown {
   display: flex;
   justify-content: center;
+}
+
+
+.pulse {
+  animation:alternate;
 }

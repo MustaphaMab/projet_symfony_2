@@ -28,17 +28,21 @@ class CommanderRepository extends ServiceEntityRepository
      * @return Commander[]
      */
     
-    public function findAllCommanderWithJointures(): array
-
-    {   
-        return $this->createQueryBuilder("c")
-                    ->addSelect('l', 'f')
-                    ->leftJoin('c.Id_Livre','l')
-                    ->leftJoin('c.Id_fournisseur','f')
-                    ->getQuery()
-                    ->getResult();
-        ;
-    }
+     public function findAllCommandesWithJointures()
+     {
+         // Crée un QueryBuilder avec l'alias 'c' pour les commandes
+         $qb = $this->createQueryBuilder('c');
+     
+         // Ajoute les jointures nécessaires, par exemple avec une entité 'Produit'
+         $qb->leftJoin('c.produit', 'p')
+            ->addSelect('p'); // Sélectionne également les champs de l'entité jointe
+     
+         // Ajoute d'autres jointures au besoin...
+     
+         // Retourne le résultat de la requête
+         return $qb->getQuery()->getResult();
+     }
+     
 
     public function findCommandesByDate(\DateTimeInterface $date): array
     {

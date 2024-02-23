@@ -29,10 +29,11 @@ class CommanderType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Commander::class,
+            // Définit data_class sur null
+            'data_class' => null,
         ]);
     }
 }
