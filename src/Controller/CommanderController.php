@@ -93,56 +93,55 @@ class CommanderController extends AbstractController
     {
         // Récupérer toutes les commandes
         $commandes = $commanderRepository->findAll();
-    
+
         $datesAchat = [];
-    
+
         // Générer les options pour le formulaire de sélection de date
         foreach ($commandes as $commandedate) {
             $dateAchat = $commandedate->getDateAchat()->format('Y-m-d'); // Formatage de la date
             $datesAchat[$dateAchat] = $dateAchat; // Utilisation de la date comme clé et comme valeur
         }
-    
+
         // Créer le formulaire de sélection de date
         $form = $this->createFormBuilder()
             ->add('date', ChoiceType::class, [
-               'choices' => $datesAchat,
-               'placeholder' => 'Choisir une date',
-                'required' => false,  
-                'multiple' => false 
+                'choices' => $datesAchat,
+                'placeholder' => 'Choisir une date',
+                'required' => false,
+                'multiple' => false
             ])
             ->getForm();
-    
+
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $dateChoisie = $form->get('date')->getData();
             $dateChoisie = new \DateTime($dateChoisie);
             $commandesDate = $commanderRepository->findBy(['Date_achat' => $dateChoisie]);
-    
+
             // Afficher les commandes filtrées par la date choisie
             return $this->render('commander/index.html.twig', [
                 'commandes' => $commandesDate,
             ]);
         }
-    
+
         // Afficher le formulaire de sélection de date si non soumis ou invalide
         return $this->render('commander/dateCommande.html.twig', [
             'form' => $form->createView(),
         ]);
     }
-    
+
 
     //******************************************** COMMANDE PAR EDITEUR ********************************************
 
-    #[Route('/editeur', name: 'commande_editeur', methods: ['GET', 'POST'])]
-
+    #[Route('/editeur', name: 'commande_par_editeur', methods: ['GET', 'POST'])]
     public function commande_editeur(Request $request, CommanderRepository $commanderRepository, EntityManagerInterface $entityManager): Response
     {
         $commande = $commanderRepository->findAllCommandesWithJointures(); // Récupérer tous les fournisseurs
 
         $form = $this->createFormBuilder()
-            ->add('editeur', ChoiceType::class, [
-                'choices' => $commande, // Utiliser les noms de fournisseur comme choix
+            ->add('editeur', ChoiceType::class, [ //liste les éditeurs
+                'choices' => $commande,
                 'choice_label' => 'IdLivre.Editeur',
                 'choice_value' => 'IdLivre.id',
                 'placeholder' => 'Choisir un editeur',
@@ -160,13 +159,13 @@ class CommanderController extends AbstractController
             $editeurchoisis = $form->get('editeur')->getData();
             $editeurselect = $editeurchoisis->getIdLivre();
 
-            return $this->render('commander/com_editeurresult.html.twig', [
+            return $this->render('commander/index.html.twig', [
                 'commandes' => $commanderRepository->findBy(['Id_Livre' => $editeurselect]),
 
             ]);
         }
 
-        return $this->render('commander/com_editeur.html.twig', [
+        return $this->render('commander/editeurCommande.html.twig', [
             'form' => $form->createView(),
 
 

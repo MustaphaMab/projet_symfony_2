@@ -33,11 +33,9 @@ class CommanderRepository extends ServiceEntityRepository
          // Crée un QueryBuilder avec l'alias 'c' pour les commandes
          $qb = $this->createQueryBuilder('c');
      
-         // Ajoute les jointures nécessaires, par exemple avec une entité 'Produit'
-         $qb->leftJoin('c.produit', 'p')
+         
+         $qb->leftJoin('c.Id_Livre', 'p')// Ajoute des jointures nécessaires
             ->addSelect('p'); // Sélectionne également les champs de l'entité jointe
-     
-         // Ajoute d'autres jointures au besoin...
      
          // Retourne le résultat de la requête
          return $qb->getQuery()->getResult();
@@ -53,28 +51,5 @@ class CommanderRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    //    /**
-    //     * @return Commander[] Returns an array of Commander objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Commander
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    
 }
