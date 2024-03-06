@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding-bottom: 60px; /* Espace pour le footer sans empiéter sur le contenu */
-  background-image: url("/images/livre.jpg");
+  background-image: url("/images/livres.jpg");
   background-size: cover;
   background-position: center;
   min-height: 100vh;
@@ -24,7 +24,7 @@ body {
 
 h1, p, ul {
   text-align: center;
-  background-color: rgba(50, 140, 201, 0.521);
+  background-color: rgba(53, 52, 62, 0.629);
   color: white;
 }
 
